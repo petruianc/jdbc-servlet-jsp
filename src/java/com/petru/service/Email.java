@@ -35,7 +35,7 @@ public class Email extends HttpServlet {
         try {
             String email = request.getParameter("responseemail");
             PrintWriter out = response.getWriter();
-            if(JavaMail.sendMail(email)) out.println("Check your email for password");
+            if(JavaMail.sendMail(email)) out.println("Check your email for password...");
         } catch (MessagingException ex) {
             Logger.getLogger(Email.class.getName()).log(Level.SEVERE, null, ex);
         }

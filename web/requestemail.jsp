@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+          
         <form action="email" method="post">
             <label for="email"><b>Enter Email</b></label>
             <input type="email" placeholder="your@email.com" name="responseemail" required>

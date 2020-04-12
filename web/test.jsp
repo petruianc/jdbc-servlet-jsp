@@ -10,6 +10,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .button {
+                background-color: red;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+        </style>
     </head>
     <body>
         <%
@@ -24,6 +38,9 @@
         %>
         
         <h1>Hello Test.jsp!</h1>
-        AITRECUT TESTU BAAAAA!!!!!!!!
+        <form action="logout">
+            <button class="button" type="submit">LOGOUT</button>
+        </form>
+        
     </body>
 </html>
