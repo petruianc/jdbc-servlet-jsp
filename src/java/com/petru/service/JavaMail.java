@@ -59,7 +59,7 @@ public class JavaMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
-            message.setSubject("Password from DB to JAva to you");
+            message.setSubject("Password from DB to Java to you");
             message.setText(new LoginDao().getUserPasswordByEmail(toMail));
             return message;
         } catch (AddressException ex) {
