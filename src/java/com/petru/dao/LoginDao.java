@@ -104,9 +104,27 @@ public class LoginDao {
        }
        return password;
    }
+   
+   public Integer getUserIdByEmail(String email){
+       Integer id = null;
+       String sql = "select id from users where email = ?";
+       try(Connection conn = DbConnection.getInstance().getConnection();
+           PreparedStatement stmt = conn.prepareStatement(sql))
+       {
+           stmt.setString(1, email);
+           ResultSet rs = stmt.executeQuery();
+           while(rs.next()){
+               id = rs.getInt("id");
+           }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+       return id;
+   }
     
     public static void main(String... args){
         System.out.println(new LoginDao().getUserByPasswordLastNameEmail("Ianc", "petruianc1503@gmail.com", "1234"));
         System.out.println(new LoginDao().getUserPasswordByEmail("ptru_nc@yahoo.com"));
+        System.out.println(new LoginDao().getUserIdByEmail("petruianc1503@gmail.com"));
     }
 }

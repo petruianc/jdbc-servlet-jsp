@@ -27,7 +27,7 @@
                 cursor: pointer;
                 position:absolute;
                 bottom:0;
-                }
+            }
         </style>
         <script type="text/javascript">
     function GenerateTable() {
@@ -79,9 +79,10 @@
                 response.sendRedirect("login.jsp");
                 
             }
+           
         %>
         
-        <h1>List of Employees</h1>
+        <h1>Hello ${lastname}!!!</h1>
         <form action="display">
             <button type="submit">
                 Get all employees 
@@ -93,7 +94,7 @@
             </label>
             <input type="text" name="searchEmployees">
         </form>
-        <form action="addemployee">
+        <form action="addEmployee.jsp">
             <button type="submit">Add Employee</button>
         </form>
          <%
@@ -129,6 +130,8 @@
           <% 
              }
           %>
+          
+        
           <% 
                 session.removeAttribute("employees");
           %>
