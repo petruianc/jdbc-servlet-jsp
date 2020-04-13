@@ -21,22 +21,19 @@ import javax.servlet.http.HttpSession;
  *
  * @author Petru
  */
-@WebServlet(name = "Display", urlPatterns = {"/display"})
-public class Display extends HttpServlet {
-
-   
+@WebServlet(name = "Search", urlPatterns = {"/search"})
+public class Search extends HttpServlet {
 
   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Employee> employees = new EmployeeDao().getEmployees();
+        List<Employee> employeesSearch = new EmployeeDao().searchEmployees(request.getParameter("searchEmployees"));
         HttpSession session = request.getSession();
-        session.setAttribute("employees", employees);
+        session.setAttribute("employeesSearch", employeesSearch);
         response.sendRedirect("employeelist.jsp");
     }
 
-    
 
 }

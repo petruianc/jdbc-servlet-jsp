@@ -83,20 +83,89 @@
         
         <h1>List of Employees</h1>
         <form action="display">
-            <button type="submit">Get Employees</button>
+            <button type="submit">
+                Get all employees
+            </button>
         </form>
-        <%
+        <form action="search">
+            <label>
+                Search employees by
+            </label>
+            <input type="text" name="searchEmployees">
+        </form>
+         <%
             
             List<Employee> employees = (List<Employee>) session.getAttribute("employees");
             if(session.getAttribute("employees")!=null){
-                for(Employee e: employees){
-                    out.println();
-                    out.println(e);
-                }
-            } 
-            session.removeAttribute("employees");
-        %>    
-      
+         %>   
+             <table>
+                <c:forEach items="${employees}" var="item">
+                  <tr>
+                     <td>
+                         <c:out value="${item.id}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.lastName}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.firstName}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.email}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.department}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.salary}"/>
+                     </td>
+                  </tr>
+                </c:forEach>
+             </table>
+                
+          <% 
+             }
+          %>
+          <% 
+                session.removeAttribute("employees");
+          %>
+          
+           <%
+            
+            List<Employee> employeesSearch = (List<Employee>) session.getAttribute("employeesSearch");
+            if(session.getAttribute("employeesSearch")!=null){
+         %>
+         <table>
+                <c:forEach items="${employeesSearch}" var="item">
+                  <tr>
+                     <td>
+                         <c:out value="${item.id}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.lastName}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.firstName}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.email}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.department}"/>
+                     </td>
+                     <td>
+                         <c:out value="${item.salary}"/>
+                     </td>
+                  </tr>
+                </c:forEach>
+             </table>
+                
+          <% 
+             }
+          %>
+          <% 
+                session.removeAttribute("employeesSearch");
+          %>
         <form action="logout">
             <button class="button" type="submit">LOGOUT</button>
         </form>
