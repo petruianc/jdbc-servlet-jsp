@@ -84,14 +84,17 @@
         <h1>List of Employees</h1>
         <form action="display">
             <button type="submit">
-                Get all employees
+                Get all employees 
             </button>
         </form>
         <form action="search">
             <label>
-                Search employees by
+                Search employees by Lastname: 
             </label>
             <input type="text" name="searchEmployees">
+        </form>
+        <form action="addemployee">
+            <button type="submit">Add Employee</button>
         </form>
          <%
             
