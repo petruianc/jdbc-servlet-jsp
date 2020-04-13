@@ -29,6 +29,18 @@
     </head>
     <body>
         <h1>Welcome to Add Employee!</h1>
+        <%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
+            response.setHeader("Pragma","no-cache");// HTTP 1.0
+            response.setHeader("Expires", "0");// proxies
+            
+            if(session.getAttribute("lastname")==null && session.getAttribute("password")==null){
+                response.sendRedirect("login.jsp");
+                
+            }
+           
+        %>
+        
         <div class="container">
         <form action="addemployee">
             Enter Last name: <input type ="text" name="lastName" required><br><br>
