@@ -25,49 +25,16 @@
                 font-size: 16px;
                 margin: 4px 2px;
                 cursor: pointer;
-                position:absolute;
-                bottom:0;
+                position: absolute;
+                top:0;
+                right:50px;
+                
             }
         </style>
-        <script type="text/javascript">
-    function GenerateTable() {
-        //Build an array containing Customer records.
-        var customers = new Array();
-        customers.push(["Customer Id", "Name", "Country"]);
-        customers.push([1, "John Hammond", "United States"]);
-        customers.push([2, "Mudassar Khan", "India"]);
-        customers.push([3, "Suzanne Mathews", "France"]);
-        customers.push([4, "Robert Schidner", "Russia"]);
- 
-        //Create a HTML Table element.
-        var table = document.createElement("TABLE");
-        table.border = "1";
- 
-        //Get the count of columns.
-        var columnCount = customers[0].length;
- 
-        //Add the header row.
-        var row = table.insertRow(-1);
-        for (var i = 0; i < columnCount; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.innerHTML = customers[0][i];
-            row.appendChild(headerCell);
-        }
- 
-        //Add the data rows.
-        for (var i = 1; i < customers.length; i++) {
-            row = table.insertRow(-1);
-            for (var j = 0; j < columnCount; j++) {
-                var cell = row.insertCell(-1);
-                cell.innerHTML = customers[i][j];
-            }
-        }
- 
-        var dvTable = document.getElementById("dvTable");
-        dvTable.innerHTML = "";
-        dvTable.appendChild(table);
-    }
-</script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     </head>
     <body>
         <%
@@ -84,7 +51,7 @@
         
         <h1>Hello ${lastname}!!!</h1>
         <form action="display">
-            <button type="submit">
+            <button class="btn btn-primary" type="submit">
                 Get all employees 
             </button>
         </form>
@@ -95,36 +62,57 @@
             <input type="text" name="searchEmployees">
         </form>
         <form action="addEmployee.jsp">
-            <button type="submit">Add Employee</button>
+            <button class="btn btn-primary pull-right" type="submit">Add Employee</button>
         </form>
          <%
             
             List<Employee> employees = (List<Employee>) session.getAttribute("employees");
             if(session.getAttribute("employees")!=null){
          %>   
-             <table>
-                <c:forEach items="${employees}" var="item">
-                  <tr>
-                     <td>
+             <table class="table table-dark" name="empltable">
+                 <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">LAST NAME</th>
+                        <th scope="col">FIRST NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">DEPARTMENT</th>
+                        <th scope="col">SALARY</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                   <c:forEach items="${employees}" var="item">
+                  
+                    <tr>
+                      
+                      <td>
+
                          <c:out value="${item.id}"/>
                      </td>
+                   
                      <td>
+                          
                          <c:out value="${item.lastName}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.firstName}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.email}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.department}"/>
                      </td>
                      <td>
+                        
                          <c:out value="${item.salary}"/>
                      </td>
                   </tr>
                 </c:forEach>
+                  </tbody>
              </table>
                 
           <% 
@@ -142,7 +130,17 @@
             if(session.getAttribute("employeesSearch")!=null){
          %>
          <table>
-                <c:forEach items="${employeesSearch}" var="item">
+             <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">LAST NAME</th>
+                        <th scope="col">FIRST NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">DEPARTMENT</th>
+                        <th scope="col">SALARY</th>
+                    </tr>
+                   </thead>   
+             <c:forEach items="${employeesSearch}" var="item">
                   <tr>
                      <td>
                          <c:out value="${item.id}"/>

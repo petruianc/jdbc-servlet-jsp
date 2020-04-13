@@ -73,12 +73,31 @@ span.psw {
   }
 }
 </style>
+<script type="text/javascript">
+    function login_alerts(){
+        var lastname = document.forms["loginform"]["lastname"].value;
+        if(lastname===null || lastname===""){
+            alert("Enter your last name !!!");
+        }
+        var password = document.forms["loginform"]["password"].value;
+        if(password===null || password===""){
+            alert("Enter your password !!!");
+        }
+        var email = document.forms["loginform"]["email"].value;
+        if(email===null || email===""){
+            alert("Enter your email !!!");
+        }
+        
+    }
+    
+</script>
+
 </head>
 <body>
 
 <h2>WELCOME</h2>
 
-<form action="login" method="post">
+<form action="login" method="post" name="loginform">
   <div class="imgcontainer">
     <img src="login.png" alt="Avatar" class="avatar">
   </div>
@@ -93,7 +112,7 @@ span.psw {
     <label for="email"><b>Email</b></label>
     <input type="email" placeholder="your@email.com" name="email" required>
         
-    <button type="submit">Login</button>
+    <button type="submit" onclick="return login_alerts()">Login</button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
