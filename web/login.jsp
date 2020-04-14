@@ -73,6 +73,7 @@ span.psw {
   }
 }
 </style>
+
 <script type="text/javascript">
     function login_alerts(){
         var lastname = document.forms["loginform"]["lastname"].value;
@@ -89,6 +90,7 @@ span.psw {
         }
         
     }
+    
     
 </script>
 

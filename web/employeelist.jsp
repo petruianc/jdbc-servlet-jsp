@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
-            .button {
+            .buttonLogout {
                 background-color: red;
                 border: none;
                 color: white;
@@ -28,8 +28,22 @@
                 position: absolute;
                 top:0;
                 right:50px;
-                
+                border-radius: 8px;
             }
+            .buttonAdd {
+                background-color: blue; /* Green */
+                border: none;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 6px 4px;
+                cursor: pointer;
+                border-radius: 30%;
+            }
+           
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -51,18 +65,24 @@
         
         <h1>Hello ${lastname}!!!</h1>
         <form action="display">
-            <button class="btn btn-primary" type="submit">
+            <button class="buttonAdd" type="submit">
                 Get all employees 
             </button>
         </form>
         <form action="search">
-            <label>
-                Search employees by Lastname: 
-            </label>
+            <button type="submit" class="buttonAdd">
+                Search by last name 
+            </button>
             <input type="text" name="searchEmployees">
         </form>
         <form action="addEmployee.jsp">
-            <button class="btn btn-primary pull-right" type="submit">Add Employee</button>
+            <button class="buttonAdd" type="submit">Add Employee</button>
+        </form>
+        <form action="searchByDepartment">
+            <button type="submit" class="buttonAdd">
+                Search by department
+            </button>
+            <input type="text" name="searchByDepartment">
         </form>
          <%
             
@@ -120,16 +140,16 @@
           %>
           
         
-          <% 
+           <% 
                 session.removeAttribute("employees");
-          %>
+           %>
           
            <%
-            
             List<Employee> employeesSearch = (List<Employee>) session.getAttribute("employeesSearch");
             if(session.getAttribute("employeesSearch")!=null){
-         %>
-         <table>
+           %>
+       
+         <table class="table table-dark" id="searchTable">
              <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
@@ -140,38 +160,132 @@
                         <th scope="col">SALARY</th>
                     </tr>
                    </thead>   
-             <c:forEach items="${employeesSearch}" var="item">
-                  <tr>
-                     <td>
+             <tbody>
+                   <c:forEach items="${employeesSearch}" var="item">
+                  
+                    <tr>
+                      
+                      <td>
+
                          <c:out value="${item.id}"/>
                      </td>
+                   
                      <td>
+                          
                          <c:out value="${item.lastName}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.firstName}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.email}"/>
                      </td>
                      <td>
+                         
                          <c:out value="${item.department}"/>
                      </td>
                      <td>
+                        
                          <c:out value="${item.salary}"/>
                      </td>
                   </tr>
                 </c:forEach>
+                  </tbody>
              </table>
-                
-          <% 
+         <%
              }
-          %>
-          <% 
+         %>
+         
+         <% 
                 session.removeAttribute("employeesSearch");
-          %>
+         %>
+        
+         <%
+             List<Employee> empDep = (List<Employee>)session.getAttribute("empDep");
+             if(session.getAttribute("empDep")!=null){
+         %>
+            <table class="table table-dark" id="searchTable">
+             <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">LAST NAME</th>
+                        <th scope="col">FIRST NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">DEPARTMENT</th>
+                        <th scope="col">SALARY</th>
+                    </tr>
+                   </thead>   
+             <tbody>
+                   <c:forEach items="${empDep}" var="item">
+                  
+                    <tr>
+                      
+                      <td>
+
+                         <c:out value="${item.id}"/>
+                     </td>
+                   
+                     <td>
+                          
+                         <c:out value="${item.lastName}"/>
+                     </td>
+                     <td>
+                         
+                         <c:out value="${item.firstName}"/>
+                     </td>
+                     <td>
+                         
+                         <c:out value="${item.email}"/>
+                     </td>
+                     <td>
+                         
+                         <c:out value="${item.department}"/>
+                     </td>
+                     <td>
+                        
+                         <c:out value="${item.salary}"/>
+                     </td>
+                  </tr>
+                </c:forEach>
+                  </tbody>
+             </table>
+         <%
+            }
+         %>
+         <%
+             session.removeAttribute("empDep");
+         %>
+<script>
+    //gets table
+    var oTable = document.getElementById('searchTable');
+
+    //gets rows of table
+    var rowLength = oTable.rows.length;
+
+    //loops through rows    
+    for (i = 1; i < rowLength; i++){
+        
+      //gets cells of current row  
+       var oCells = oTable.rows.item(i).cells;
+
+       //gets amount of cells of current row
+       var cellLength = oCells.length;
+
+       //loops through each cell in current row
+       for(var j = 0; j < cellLength; j++){
+
+              // get your cell info here
+
+              var cellVal = oCells.item(j).innerHTML;
+              console.log(cellVal);
+           }
+    }
+</script>
+          
         <form action="logout">
-            <button class="button" type="submit">LOGOUT</button>
+            <button class="buttonLogout" type="submit">LOGOUT</button>
         </form>
         
     </body>

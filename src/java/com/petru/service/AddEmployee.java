@@ -50,8 +50,6 @@ public class AddEmployee extends HttpServlet {
                 System.out.println("id is: "+id);
                 if(dao.addEmployee(emp, id)) out.println("Employee added!!!");
                 
-            }else{
-                out.println("You must fill in all the spaces!!!");
             }
                 
         }
