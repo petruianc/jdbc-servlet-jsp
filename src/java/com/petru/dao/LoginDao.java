@@ -79,6 +79,7 @@ public class LoginDao {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 ok = true;
+                
             }
                 return ok;
         }catch(Exception e){

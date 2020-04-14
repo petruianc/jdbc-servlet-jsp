@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
@@ -43,9 +44,31 @@
                 cursor: pointer;
                 border-radius: 30%;
             }
+            .wrapper {
+                text-align: center;
+                position: absolute;
+                top: 10%;
+            }
+            .wrapperleft{
+                text-align: left;
+                position: relative;
+                top: 20%;
+            }
+            .wrapperright{
+                text-align: right;
+                position: absolute;
+                top: 10%;
+            }
+            input[type=text] {
+                 width: 50%;
+                 padding: 8px 16px;
+                 margin: 8px 0;
+                 box-sizing: border-box;
+            }
+
            
         </style>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -64,28 +87,48 @@
         %>
         
         <h1>Hello ${lastname}!!!</h1>
-        <form action="display">
-            <button class="buttonAdd" type="submit">
-                Get all employees 
-            </button>
-        </form>
-        <form action="search">
-            <button type="submit" class="buttonAdd">
-                Search by last name 
-            </button>
-            <input type="text" name="searchEmployees">
-        </form>
-        <form action="addEmployee.jsp">
-            <button class="buttonAdd" type="submit">Add Employee</button>
-        </form>
-        <form action="searchByDepartment">
-            <button type="submit" class="buttonAdd">
-                Search by department
-            </button>
-            <input type="text" name="searchByDepartment">
-        </form>
+      
+        <table>
+            <thead>
+                <tr>
+                    <th> 
+                        <form action="display">
+                            <button class="buttonAdd" type="submit">Get all employees</button>
+                        </form>
+                    </th>
+                    <th> 
+                        <form action="addEmployee.jsp">
+                            <button class="buttonAdd" type="submit">Add Employee</button>
+                        </form>
+                    </th>
+                    <th>
+                        <form action="deleteemployee">
+                            <button class="buttonAdd" type="submit">Delete by id</button>
+                            <input type="text" name="deleteEmp">
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+       
+         <form action="search">
+            <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary" type="submit">Search by last name</button>
+          </div>
+            <input type="text" class="form-control" name="searchEmployees" aria-label="" aria-describedby="basic-addon1">
+            </div>
+         </form>
+         <form action="searchByDepartment">
+            <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary" type="submit">Search by department</button>
+          </div>
+            <input type="text" class="form-control" name="searchByDepartment" aria-label="" aria-describedby="basic-addon1">
+            </div>
+         </form>
+
          <%
-            
             List<Employee> employees = (List<Employee>) session.getAttribute("employees");
             if(session.getAttribute("employees")!=null){
          %>   
@@ -129,6 +172,9 @@
                      <td>
                         
                          <c:out value="${item.salary}"/>
+                     </td>
+                     <td>
+                         <button>Edit</button>
                      </td>
                   </tr>
                 </c:forEach>
