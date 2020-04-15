@@ -146,7 +146,7 @@
                    </thead>
                    <tbody>
                    <c:forEach items="${employees}" var="item">
-                  
+                       
                     <tr>
                       
                       <td>
@@ -174,10 +174,13 @@
                         
                          <c:out value="${item.salary}"/>
                      </td>
+                     
                      <td>
-                         <button>Edit</button>
+                         <a href="edit.jsp?studId=${item.id}" class="btn btn-primary">Edit</a>
                      </td>
-                  </tr>
+                      
+             </tr>
+                      
                 </c:forEach>
                   </tbody>
              </table>

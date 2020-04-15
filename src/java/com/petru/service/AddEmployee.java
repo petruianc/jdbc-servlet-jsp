@@ -49,11 +49,10 @@ public class AddEmployee extends HttpServlet {
                 Integer id = new LoginDao().getUserIdByEmail((String) session.getAttribute("email"));
                 System.out.println("id is: "+id);
                 if(dao.addEmployee(emp, id)) out.println("Employee added!!!");
-                
-            }
+            
                 
         }
-    
+    }
 }
 
   

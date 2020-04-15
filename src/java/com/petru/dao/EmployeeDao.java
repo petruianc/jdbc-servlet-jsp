@@ -289,6 +289,43 @@ public class EmployeeDao {
             return delete;
     }
     
+    public boolean editEmployee(Employee emp, int empId, int userId){
+        boolean edit = false;
+        String sql = "update employees set last_name=?, first_name=?, email=?, department=?, salary=? where id=?";
+        try(Connection conn = DbConnection.getInstance().getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql))
+        {
+            stmt.setInt(6, empId);
+            stmt.setString(1, emp.getLastName());
+            stmt.setString(2, emp.getFirstName());
+            stmt.setString(3, emp.getEmail());
+            stmt.setString(4, emp.getDepartment());
+            stmt.setBigDecimal(5, emp.getSalary());
+            int row = stmt.executeUpdate();
+            if(row>0){
+                edit = true;
+                String insertSql = "insert into audit_history(user_id, employee_id, action, action_date_time) values(?,?,?,?)";
+                 String status = "Employee edited!";
+                 try(PreparedStatement insertStmt = conn.prepareStatement(insertSql))
+                 {   
+                     insertStmt.setInt(1, userId);
+                     insertStmt.setInt(2, empId);
+                     insertStmt.setString(3, status);
+                     insertStmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+                     int r = insertStmt.executeUpdate();
+                     if(r>0)System.out.println("editEmployee edited sucessfully!!!");
+                }catch(Exception e)
+                {
+                     e.printStackTrace();
+                }
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return edit;
+    }
+    
     public static void main(String[] args) {
 //        UserDao dao = new UserDao();
 //        //System.out.println(dao.getUsers());
