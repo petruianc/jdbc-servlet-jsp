@@ -102,7 +102,7 @@
                         </form>
                     </th>
                     <th>
-                        <form action="deleteemployee">
+                        <form action="deleteEmployee">
                             <button class="buttonAdd" type="submit">Delete by id</button>
                             <input type="text" name="deleteEmp">
                         </form>
@@ -141,6 +141,7 @@
                         <th scope="col">EMAIL</th>
                         <th scope="col">DEPARTMENT</th>
                         <th scope="col">SALARY</th>
+                        <th scope="col">ACTION</th>
                     </tr>
                    </thead>
                    <tbody>

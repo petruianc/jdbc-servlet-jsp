@@ -67,9 +67,10 @@ public class LoginDao {
 		return user;
     }
     
-   public boolean getUserByPasswordLastNameEmail(String lastName, String email, String pass){
+   public Integer getUserByPasswordLastNameEmail(String lastName, String email, String pass){
         String sql = "select * from users where password = ? and last_name = ? and email = ?";
         boolean ok = false;
+        Integer id = 0;
         try(Connection conn = DbConnection.getInstance().getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql))
         {
@@ -79,13 +80,14 @@ public class LoginDao {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 ok = true;
+                id = rs.getInt("id");
                 
             }
-                return ok;
+                return id;
         }catch(Exception e){
             e.printStackTrace();
         }
-                return ok;
+                return id;
     }
    
    public String getUserPasswordByEmail(String email){

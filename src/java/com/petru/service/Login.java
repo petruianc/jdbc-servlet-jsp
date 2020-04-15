@@ -30,19 +30,21 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       System.out.println("hello from login");
-        String lastName = request.getParameter("lastname");
+       String lastName = request.getParameter("lastname");
       System.out.println(lastName);
       String pass = request.getParameter("password");
       System.out.println(pass);
       String email = request.getParameter("email");
       System.out.println(email);
-      boolean login = new LoginDao().getUserByPasswordLastNameEmail(lastName, email, pass);
+      int login = new LoginDao().getUserByPasswordLastNameEmail(lastName, email, pass);
       
-     if(login){
+      
+     if(login>0){
           HttpSession session = request.getSession();
           session.setAttribute("email", email);
           session.setAttribute("lastname", lastName);
           session.setAttribute("password", pass);
+          session.setAttribute("id", login);
           response.sendRedirect("employeelist.jsp");
       }
     }
